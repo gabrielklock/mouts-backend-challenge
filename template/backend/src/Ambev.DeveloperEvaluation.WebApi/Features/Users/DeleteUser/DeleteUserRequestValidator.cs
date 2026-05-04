@@ -14,6 +14,8 @@ public class DeleteUserRequestValidator : AbstractValidator<DeleteUserRequest>
     {
         RuleFor(x => x.Id)
             .NotEmpty()
-            .WithMessage("User ID is required");
+            .WithMessage("User ID is required")
+            .Must(id => id != Guid.Empty)
+            .WithMessage("User ID must be a valid non-empty GUID");
     }
 }
