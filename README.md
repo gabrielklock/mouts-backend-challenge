@@ -1,77 +1,69 @@
-# Developer Evaluation Project
+# 🚀 Como rodar o projeto
 
-`READ CAREFULLY`
+Existem duas formas de executar a aplicação:
 
-## Use Case
-**You are a developer on the DeveloperStore team. Now we need to implement the API prototypes.**
+---
 
-As we work with `DDD`, to reference entities from other domains, we use the `External Identities` pattern with denormalization of entity descriptions.
+## 🐳 Usando Docker (recomendado)
 
-Therefore, you will write an API (complete CRUD) that handles sales records. The API needs to be able to inform:
+1. Acesse a pasta do backend:
 
-* Sale number
-* Date when the sale was made
-* Customer
-* Total sale amount
-* Branch where the sale was made
-* Products
-* Quantities
-* Unit prices
-* Discounts
-* Total amount for each item
-* Cancelled/Not Cancelled
+```
+cd mouts-backend-challenge/template/backend
+```
 
-It's not mandatory, but it would be a differential to build code for publishing events of:
-* SaleCreated
-* SaleModified
-* SaleCancelled
-* ItemCancelled
+2. Execute o comando:
 
-If you write the code, **it's not required** to actually publish to any Message Broker. You can log a message in the application log or however you find most convenient.
+```
+docker-compose up
+```
 
-### Business Rules
+👉 Isso irá subir:
 
-* Purchases above 4 identical items have a 10% discount
-* Purchases between 10 and 20 identical items have a 20% discount
-* It's not possible to sell above 20 identical items
-* Purchases below 4 items cannot have a discount
+- API  
+- Banco de dados  
 
-These business rules define quantity-based discounting tiers and limitations:
+---
 
-1. Discount Tiers:
-   - 4+ items: 10% discount
-   - 10-20 items: 20% discount
+## 💻 Usando Visual Studio
 
-2. Restrictions:
-   - Maximum limit: 20 items per product
-   - No discounts allowed for quantities below 4 items
+1. Abra a solution no Visual Studio  
+2. Altere o **Startup Project/Profile** para `docker-compose`  
+3. Execute normalmente (`F5` ou `Ctrl + F5`)  
 
-## Overview
-This section provides a high-level overview of the project and the various skills and competencies it aims to assess for developer candidates. 
+---
 
-See [Overview](/.doc/overview.md)
+# 🔐 Autenticação
 
-## Tech Stack
-This section lists the key technologies used in the project, including the backend, testing, frontend, and database components. 
+A API utiliza **autenticação com controle de acesso por Roles**.
 
-See [Tech Stack](/.doc/tech-stack.md)
+Já existe um usuário pré-cadastrado para facilitar os testes:
 
-## Frameworks
-This section outlines the frameworks and libraries that are leveraged in the project to enhance development productivity and maintainability. 
+- **Email:** admin@developerstore.com  
+- **Senha:** Admin@123  
 
-See [Frameworks](/.doc/frameworks.md)
+👉 Utilize esse usuário para autenticar e acessar os endpoints protegidos.
 
-<!-- 
-## API Structure
-This section includes links to the detailed documentation for the different API resources:
-- [API General](./docs/general-api.md)
-- [Products API](/.doc/products-api.md)
-- [Carts API](/.doc/carts-api.md)
-- [Users API](/.doc/users-api.md)
-- [Auth API](/.doc/auth-api.md)
--->
+---
 
-## Project Structure
-This section describes the overall structure and organization of the project files and directories. 
+# 📄 Documentação da API
 
-See [Project Structure](/.doc/project-structure.md)
+Para visualizar e testar os endpoints da API, utilize o Swagger.
+
+Após subir o projeto com Docker, acesse:
+
+👉 http://localhost:8080/swagger/index.html
+
+No Swagger é possível:
+
+- Visualizar todos os endpoints disponíveis  
+- Testar requisições diretamente  
+- Ver os modelos de entrada e saída  
+
+---
+
+# 📌 Observações
+
+- Os endpoints possuem autorização baseada em **Roles**  
+- Certifique-se de estar autenticado antes de consumir endpoints protegidos  
+- O Swagger facilita o fluxo de testes e exploração da API  
