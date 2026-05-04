@@ -70,6 +70,25 @@ public class Program
 
             app.MapControllers();
 
+            // Aplicando as migrações automaticamente em ambiente de desenvolvimento para facilitar o processo de desenvolvimento e testes.
+            if (app.Environment.IsDevelopment())
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetRequiredService<DefaultContext>();
+
+                    for (int i = 0; i < 15; i++)
+                    {
+                        if (context.Database.CanConnect())
+                        {
+                            context.Database.Migrate();
+                            break;
+                        }
+                        Thread.Sleep(3000);
+                    }
+                }
+            }
+
             app.Run();
         }
         catch (Exception ex)
